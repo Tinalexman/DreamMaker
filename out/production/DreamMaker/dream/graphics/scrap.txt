@@ -1,0 +1,463 @@
+this.mesh.vertices = new float[]
+        {
+                -0.5f, -0.5f, -0.5f,
+                0.5f, -0.5f, -0.5f,
+                0.5f, 0.5f, -0.5f,
+                0.5f, 0.5f, -0.5f,
+                -0.5f, 0.5f, -0.5f,
+                -0.5f, -0.5f, -0.5f,
+
+                -0.5f, -0.5f, 0.5f,
+                0.5f, -0.5f, 0.5f,
+                0.5f, 0.5f, 0.5f,
+                0.5f, 0.5f, 0.5f,
+                -0.5f, 0.5f, 0.5f,
+                -0.5f, -0.5f, 0.5f,
+
+                -0.5f, 0.5f, 0.5f,
+                -0.5f, 0.5f, -0.5f,
+                -0.5f, -0.5f, -0.5f,
+                -0.5f, -0.5f, -0.5f,
+                -0.5f, -0.5f, 0.5f,
+                -0.5f, 0.5f, 0.5f,
+
+                0.5f, 0.5f, 0.5f,
+                0.5f, 0.5f, -0.5f,
+                0.5f, -0.5f, -0.5f,
+                0.5f, -0.5f, -0.5f,
+                0.5f, -0.5f, 0.5f,
+                0.5f, 0.5f, 0.5f,
+
+                -0.5f, -0.5f, -0.5f,
+                0.5f, -0.5f, -0.5f,
+                0.5f, -0.5f, 0.5f,
+                0.5f, -0.5f, 0.5f,
+                -0.5f, -0.5f, 0.5f,
+                -0.5f, -0.5f, -0.5f,
+
+                -0.5f, 0.5f, -0.5f,
+                0.5f, 0.5f, -0.5f,
+                0.5f, 0.5f, 0.5f,
+                0.5f, 0.5f, 0.5f,
+                -0.5f, 0.5f, 0.5f,
+                -0.5f, 0.5f, -0.5f
+        };
+
+        this.mesh.textures = new float[]
+                {
+                        0.0f, 0.0f,
+                        1.0f, 0.0f,
+                        1.0f, 1.0f,
+                        1.0f, 1.0f,
+                        0.0f, 1.0f,
+                        0.0f, 0.0f,
+
+                        0.0f, 0.0f,
+                        1.0f, 0.0f,
+                        1.0f, 1.0f,
+                        1.0f, 1.0f,
+                        0.0f, 1.0f,
+                        0.0f, 0.0f,
+
+                        1.0f, 0.0f,
+                        1.0f, 1.0f,
+                        0.0f, 1.0f,
+                        0.0f, 1.0f,
+                        0.0f, 0.0f,
+                        1.0f, 0.0f,
+
+                        1.0f, 0.0f,
+                        1.0f, 1.0f,
+                        0.0f, 1.0f,
+                        0.0f, 1.0f,
+                        0.0f, 0.0f,
+                        1.0f, 0.0f,
+
+                        0.0f, 1.0f,
+                        1.0f, 1.0f,
+                        1.0f, 0.0f,
+                        1.0f, 0.0f,
+                        0.0f, 0.0f,
+                        0.0f, 1.0f,
+
+                        0.0f, 1.0f,
+                        1.0f, 1.0f,
+                        1.0f, 0.0f,
+                        1.0f, 0.0f,
+                        0.0f, 0.0f,
+                        0.0f, 1.0f
+                };
+
+        this.mesh.normals = new float[]
+                {
+                        0.0f, 0.0f, -1.0f,
+                        0.0f, 0.0f, -1.0f,
+                        0.0f, 0.0f, -1.0f,
+                        0.0f, 0.0f, -1.0f,
+                        0.0f, 0.0f, -1.0f,
+                        0.0f, 0.0f, -1.0f,
+
+                        0.0f, 0.0f, 1.0f,
+                        0.0f, 0.0f, 1.0f,
+                        0.0f, 0.0f, 1.0f,
+                        0.0f, 0.0f, 1.0f,
+                        0.0f, 0.0f, 1.0f,
+                        0.0f, 0.0f, 1.0f,
+
+                        -1.0f, 0.0f, 0.0f,
+                        -1.0f, 0.0f, 0.0f,
+                        -1.0f, 0.0f, 0.0f,
+                        -1.0f, 0.0f, 0.0f,
+                        -1.0f, 0.0f, 0.0f,
+                        -1.0f, 0.0f, 0.0f,
+
+                        1.0f, 0.0f, 0.0f,
+                        1.0f, 0.0f, 0.0f,
+                        1.0f, 0.0f, 0.0f,
+                        1.0f, 0.0f, 0.0f,
+                        1.0f, 0.0f, 0.0f,
+                        1.0f, 0.0f, 0.0f,
+
+                        0.0f, -1.0f, 0.0f,
+                        0.0f, -1.0f, 0.0f,
+                        0.0f, -1.0f, 0.0f,
+                        0.0f, -1.0f, 0.0f,
+                        0.0f, -1.0f, 0.0f,
+                        0.0f, -1.0f, 0.0f,
+
+                        0.0f, 1.0f, 0.0f,
+                        0.0f, 1.0f, 0.0f,
+                        0.0f, 1.0f, 0.0f,
+                        0.0f, 1.0f, 0.0f,
+                        0.0f, 1.0f, 0.0f,
+                        0.0f, 1.0f, 0.0f
+                };
+
+
+
+
+
+float[] positions = new float[]
+        {
+          -0.5f, 0.5f, 0.5f,
+          -0.5f, -0.5f, 0.5f,
+          0.5f, -0.5f, 0.5f,
+          0.5f, 0.5f, 0.5f,
+
+          -0.5f, 0.5f, -0.5f,
+          0.5f, 0.5f, -0.5f,
+          -0.5f, -0.5f, -0.5f,
+          0.5f, -0.5f, -0.5f
+        };
+
+        int[] indices = new int[]
+        {
+          0, 1, 3, 3, 1, 2,
+          4, 0, 3, 5, 4, 3,
+          3, 2, 7, 5, 3, 7,
+          6, 1, 0, 6, 0, 4,
+          2, 1, 6, 2, 6, 7,
+          7, 6, 4, 7, 4, 5
+        };
+
+        this.mesh.vertices = positions;
+        this.mesh.indices = indices;
+
+
+
+
+
+
+
+       float[] vertices = {
+       				-0.5f,0.5f,-0.5f,
+       				-0.5f,-0.5f,-0.5f,
+       				0.5f,-0.5f,-0.5f,
+       				0.5f,0.5f,-0.5f,
+
+       				-0.5f,0.5f,0.5f,
+       				-0.5f,-0.5f,0.5f,
+       				0.5f,-0.5f,0.5f,
+       				0.5f,0.5f,0.5f,
+
+       				0.5f,0.5f,-0.5f,
+       				0.5f,-0.5f,-0.5f,
+       				0.5f,-0.5f,0.5f,
+       				0.5f,0.5f,0.5f,
+
+       				-0.5f,0.5f,-0.5f,
+       				-0.5f,-0.5f,-0.5f,
+       				-0.5f,-0.5f,0.5f,
+       				-0.5f,0.5f,0.5f,
+
+       				-0.5f,0.5f,0.5f,
+       				-0.5f,0.5f,-0.5f,
+       				0.5f,0.5f,-0.5f,
+       				0.5f,0.5f,0.5f,
+
+       				-0.5f,-0.5f,0.5f,
+       				-0.5f,-0.5f,-0.5f,
+       				0.5f,-0.5f,-0.5f,
+       				0.5f,-0.5f,0.5f
+
+       		};
+
+       		float[] textureCoords = {
+
+       				0,0,
+       				0,1,
+       				1,1,
+       				1,0,
+       				0,0,
+       				0,1,
+       				1,1,
+       				1,0,
+       				0,0,
+       				0,1,
+       				1,1,
+       				1,0,
+       				0,0,
+       				0,1,
+       				1,1,
+       				1,0,
+       				0,0,
+       				0,1,
+       				1,1,
+       				1,0,
+       				0,0,
+       				0,1,
+       				1,1,
+       				1,0
+
+
+       		};
+
+       		int[] indices = {
+       				0,1,3,
+       				3,1,2,
+       				4,5,7,
+       				7,5,6,
+       				8,9,11,
+       				11,9,10,
+       				12,13,15,
+       				15,13,14,
+       				16,17,19,
+       				19,17,18,
+       				20,21,23,
+       				23,21,22
+
+       		};
+
+
+
+       		LightCube light = EntityManager.createNewLightCube();
+                        light.attachShader(new Shader("shaders\\light.vert", "shaders\\light.frag"));
+                        light.setPosition(new Vector3f(1.7f, 0.3f,1.5f));
+                        light.setTexture(blue);
+                        light.load();
+
+                        LightCube sun = EntityManager.createNewLightCube();
+                        sun.attachShader(new Shader("shaders\\light.vert", "shaders\\light.frag"));
+                        sun.setTexture(lightTexture);
+                        sun.setPosition(new Vector3f(-1.7f, 0.3f,1.5f));
+                        sun.load();
+
+                        DreamCube cube = EntityManager.createNewCube();
+                        cube.attachShader(new Shader( "shaders\\entity.vert", "shaders\\entity.frag"));
+                        cube.setTexture(cubeTexture);
+                        cube.load();
+
+                        this.renderer = new Renderer();
+                        Shader shader = cube.getShader();
+                        shader.startProgram();
+                        shader.loadUniform("viewPosition", this.renderer.getCamera().getPosition());
+                        shader.loadUniform("isTextured", false);
+                        DreamMaterial material = Materials.ORANGE;
+                        DreamLight lighting = new DreamLight(Lights.WHITE_LIGHT);
+                        lighting.setPosition(light.getPosition());
+                        cube.applyMaterial(material);
+                        cube.applyLighting(lighting);
+                        shader.stopProgram();
+
+
+
+
+
+
+
+
+
+                        DreamCube venus = EntityManager.createNewCube();
+                        //            venus.attachShader(new Shader("shaders//entity.vert", "shaders//entity.frag"));
+                        //            venus.setPosition(new Vector3f(0.0f, 2.5f, 0.0f));
+                        //            venus.setScale(new Vector3f(0.25f));
+                        //            venus.load();
+                        //            Shader venusShader = venus.getShader();
+                        //            venusShader.startProgram();
+                        //            venusShader.loadUniform("viewPosition", this.renderer.getCamera().getPosition());
+                        //            venusShader.loadUniform("isTextured", false);
+                        //            venus.applyMaterial(Materials.CYAN);
+                        //            venus.applyLighting(Lights.WHITE_LIGHT);
+                        //            venusShader.stopProgram();
+                        //
+                        //            DreamCube earth = EntityManager.createNewCube();
+                        //            earth.attachShader(new Shader("shaders//entity.vert", "shaders//entity.frag"));
+                        //            earth.setPosition(new Vector3f(0.0f, 3.5f, 0.0f));
+                        //            earth.setScale(new Vector3f(0.35f));
+                        //            earth.load();
+                        //            Shader earthShader = earth.getShader();
+                        //            earthShader.startProgram();
+                        //            earthShader.loadUniform("viewPosition", this.renderer.getCamera().getPosition());
+                        //            earthShader.loadUniform("isTextured", false);
+                        //            earth.applyMaterial(Materials.BLUE);
+                        //            earth.applyLighting(Lights.WHITE_LIGHT);
+                        //            earthShader.stopProgram();
+                        //
+                        //            DreamCube mars = EntityManager.createNewCube();
+                        //            mars.attachShader(new Shader("shaders//entity.vert", "shaders//entity.frag"));
+                        //            mars.setPosition(new Vector3f(0.0f, 4.5f, 0.0f));
+                        //            mars.setScale(new Vector3f(0.4f));
+                        //            mars.load();
+                        //            Shader marsShader = mars.getShader();
+                        //            marsShader.startProgram();
+                        //            marsShader.loadUniform("viewPosition", this.renderer.getCamera().getPosition());
+                        //            marsShader.loadUniform("isTextured", false);
+                        //            mars.applyMaterial(Materials.RED);
+                        //            mars.applyLighting(Lights.WHITE_LIGHT);
+                        //            marsShader.stopProgram();
+                        //
+                        //            DreamCube jupiter = EntityManager.createNewCube();
+                        //            jupiter.attachShader(new Shader("shaders//entity.vert", "shaders//entity.frag"));
+                        //            jupiter.setPosition(new Vector3f(0.0f, 5.5f, 0.0f));
+                        //            jupiter.setScale(new Vector3f(0.65f));
+                        //            jupiter.load();
+                        //            Shader jupiterShader = jupiter.getShader();
+                        //            jupiterShader.startProgram();
+                        //            jupiterShader.loadUniform("viewPosition", this.renderer.getCamera().getPosition());
+                        //            jupiterShader.loadUniform("isTextured", false);
+                        //            jupiter.applyMaterial(Materials.CARAMEL);
+                        //            jupiter.applyLighting(Lights.WHITE_LIGHT);
+                        //            jupiterShader.stopProgram();
+                        //
+                        //            DreamCube saturn = EntityManager.createNewCube();
+                        //            saturn.attachShader(new Shader("shaders//entity.vert", "shaders//entity.frag"));
+                        //            saturn.setPosition(new Vector3f(0.0f, 6.5f, 0.0f));
+                        //            saturn.setScale(new Vector3f(0.6f));
+                        //            saturn.load();
+                        //            Shader saturnShader = saturn.getShader();
+                        //            saturnShader.startProgram();
+                        //            saturnShader.loadUniform("viewPosition", this.renderer.getCamera().getPosition());
+                        //            saturnShader.loadUniform("isTextured", false);
+                        //            saturn.applyMaterial(Materials.YELLOW);
+                        //            saturn.applyLighting(Lights.WHITE_LIGHT);
+                        //            saturnShader.stopProgram();
+                        //
+                        //
+                        //            DreamCube uranus = EntityManager.createNewCube();
+                        //            uranus.attachShader(new Shader("shaders//entity.vert", "shaders//entity.frag"));
+                        //            uranus.setPosition(new Vector3f(0.0f, 7.5f, 0.0f));
+                        //            uranus.setScale(new Vector3f(0.5f));
+                        //            uranus.load();
+                        //            Shader uranusShader = uranus.getShader();
+                        //            uranusShader.startProgram();
+                        //            uranusShader.loadUniform("viewPosition", this.renderer.getCamera().getPosition());
+                        //            uranusShader.loadUniform("isTextured", false);
+                        //            uranus.applyMaterial(Materials.PURPLE);
+                        //            uranus.applyLighting(Lights.WHITE_LIGHT);
+                        //            uranusShader.stopProgram();
+                        //
+                        //
+                        //            DreamCube neptune = EntityManager.createNewCube();
+                        //            neptune.attachShader(new Shader("shaders//entity.vert", "shaders//entity.frag"));
+                        //            neptune.setPosition(new Vector3f(0.0f, 8.5f, 0.0f));
+                        //            neptune.setScale(new Vector3f(0.45f));
+                        //            neptune.load();
+                        //            Shader neptuneShader = neptune.getShader();
+                        //            neptuneShader.startProgram();
+                        //            neptuneShader.loadUniform("viewPosition", this.renderer.getCamera().getPosition());
+                        //            neptuneShader.loadUniform("isTextured", false);
+                        //            neptune.applyMaterial(Materials.BLUE);
+                        //            neptune.applyLighting(Lights.WHITE_LIGHT);
+                        //            neptuneShader.stopProgram();
+                        //
+                        //
+                        //            DreamCube pluto = EntityManager.createNewCube();
+                        //            pluto.attachShader(new Shader("shaders//entity.vert", "shaders//entity.frag"));
+                        //            pluto.setPosition(new Vector3f(0.0f, 9.5f, 0.0f));
+                        //            pluto.setScale(new Vector3f(0.15f));
+                        //            pluto.load();
+                        //            Shader plutoShader = pluto.getShader();
+                        //            plutoShader.startProgram();
+                        //            plutoShader.loadUniform("viewPosition", this.renderer.getCamera().getPosition());
+                        //            plutoShader.loadUniform("isTextured", false);
+                        //            pluto.applyMaterial(Materials.CYAN);
+                        //            pluto.applyLighting(Lights.WHITE_LIGHT);
+                        //            plutoShader.stopProgram();
+
+
+
+
+                        /        DreamModel venus = models.get(2);
+                        //        float venusX = (float) (Math.sin(glfwGetTime() * 0.65) * 2.5f);
+                        //        float venusY = (float) (Math.cos(glfwGetTime() * 0.65) * 2.5f);
+                        //        venus.setTransformationMatrix(new Matrix4f().identity().
+                        //                translate(new Vector3f(venusX, venusY, 0.0f))
+                        //                .rotate((float) (Math.toRadians(glfwGetTime()) * 65f), new Vector3f(0.0f, 1.0f, 0.0f))
+                        //                .scale(venus.getScale()));
+                        //
+                        //        DreamModel earth = models.get(3);
+                        //        float earthX = (float) (Math.sin(glfwGetTime() * 0.6) * 3.0f);
+                        //        float earthY = (float) (Math.cos(glfwGetTime() * 0.6) * 3.0f);
+                        //        earth.setTransformationMatrix(new Matrix4f().identity().
+                        //                translate(new Vector3f(earthX, earthY, 0.0f))
+                        //                .rotate((float) (Math.toRadians(glfwGetTime()) * 60f), new Vector3f(0.0f, 1.0f, 0.0f))
+                        //                .scale(earth.getScale()));
+                        //
+                        //        DreamModel mars = models.get(4);
+                        //        float marsX = (float) (Math.sin(glfwGetTime() * 0.4) * 5.5f);
+                        //        float marsY = (float) (Math.cos(glfwGetTime() * 0.4) * 5.5f);
+                        //        mars.setTransformationMatrix(new Matrix4f().identity().
+                        //                translate(new Vector3f(marsX, marsY, 0.0f))
+                        //                .rotate((float) (Math.toRadians(glfwGetTime()) * 30f), new Vector3f(0.0f, 1.0f, 0.0f))
+                        //                .scale(mars.getScale()));
+                        //
+                        //        DreamModel jupiter = models.get(5);
+                        //        float jupiterX = (float) (Math.sin(glfwGetTime() * 0.3) * 8.5f);
+                        //        float jupiterY = (float) (Math.cos(glfwGetTime() * 0.3) * 8.5f);
+                        //        jupiter.setTransformationMatrix(new Matrix4f().identity().
+                        //                translate(new Vector3f(jupiterX, jupiterY, 0.0f))
+                        //                .rotate((float) (Math.toRadians(glfwGetTime()) * 20f), new Vector3f(0.0f, 1.0f, 0.0f))
+                        //                .scale(jupiter.getScale()));
+                        //
+                        //        DreamModel saturn = models.get(6);
+                        //        float saturnX = (float) (Math.sin(glfwGetTime() * 0.15) * 10.0f);
+                        //        float saturnY = (float) (Math.cos(glfwGetTime() * 0.15) * 10.0f);
+                        //        saturn.setTransformationMatrix(new Matrix4f().identity().
+                        //                translate(new Vector3f(saturnX, saturnY, 0.0f))
+                        //                .rotate((float) (Math.toRadians(glfwGetTime()) * 15f), new Vector3f(0.0f, 1.0f, 0.0f))
+                        //                .scale(saturn.getScale()));
+                        //
+                        //        DreamModel uranus = models.get(7);
+                        //        float uranusX = (float) (Math.sin(glfwGetTime() * 0.1) * 12.5f);
+                        //        float uranusY = (float) (Math.cos(glfwGetTime() * 0.1) * 12.5f);
+                        //        uranus.setTransformationMatrix(new Matrix4f().identity().
+                        //                translate(new Vector3f(uranusX, uranusY, 0.0f))
+                        //                .rotate((float) (Math.toRadians(glfwGetTime()) * 10f), new Vector3f(1.0f, 0.0f, 0.0f))
+                        //                .scale(uranus.getScale()));
+                        //
+                        //        DreamModel neptune = models.get(8);
+                        //        float neptuneX = (float) (Math.sin(glfwGetTime() * 0.08) * 15.0f);
+                        //        float neptuneY = (float) (Math.cos(glfwGetTime() * 0.08) * 15.0f);
+                        //        neptune.setTransformationMatrix(new Matrix4f().identity().
+                        //                translate(new Vector3f(neptuneX, neptuneY, 0.0f))
+                        //                .rotate((float) (Math.toRadians(glfwGetTime()) * 5f), new Vector3f(0.0f, 1.0f, 0.0f))
+                        //                .scale(neptune.getScale()));
+                        //
+                        //
+                        //        DreamModel pluto = models.get(9);
+                        //        float plutoX = (float) (Math.sin(glfwGetTime() * 0.04) * 18.5f);
+                        //        float plutoY = (float) (Math.cos(glfwGetTime() * 0.04) * 18.5f);
+                        //        pluto.setTransformationMatrix(new Matrix4f().identity().
+                        //                translate(new Vector3f(plutoX, plutoY, 0.0f))
+                        //                .rotate((float) (Math.toRadians(glfwGetTime()) * 2f), new Vector3f(0.0f, 1.0f, 0.0f))
+                        //                .scale(pluto.getScale()));
