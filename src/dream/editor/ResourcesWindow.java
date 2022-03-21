@@ -5,7 +5,7 @@ import imgui.ImGui;
 public class ResourcesWindow
 {
 
-    public static void drawImGui()
+    public void drawImGui()
     {
         ImGui.begin("Resources");
         ImGui.text("Some Text");

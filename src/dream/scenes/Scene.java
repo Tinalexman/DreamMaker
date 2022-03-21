@@ -1,7 +1,6 @@
 package dream.scenes;
 
 import dream.ecs.entities.Entity;
-import dream.graphics.renderer.Renderer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,9 +10,7 @@ import java.util.Map;
 public class Scene
 {
     protected final Map<String, Entity> sceneObjects;
-    protected static Renderer currentSceneRenderer;
     protected boolean isRunning;
-    protected Entity selectedEntity;
 
     public Scene()
     {
@@ -21,19 +18,9 @@ public class Scene
         isRunning = false;
     }
 
-    public static Renderer getCurrentSceneRenderer()
+    public List<Entity> getSceneObjects()
     {
-        return currentSceneRenderer;
-    }
-
-    public static void setCurrentSceneRenderer(Renderer renderer)
-    {
-        currentSceneRenderer = renderer;
-    }
-
-    public Map<String, Entity> getSceneObjects()
-    {
-        return this.sceneObjects;
+        return new ArrayList<>(this.sceneObjects.values());
     }
 
     public void addSceneObject(Entity entity)
@@ -43,36 +30,20 @@ public class Scene
             entity.start();
     }
 
-    public void destroy()
-    {
-
-    }
-
     public void removeSceneObject(Entity entity)
     {
         entity.removeAllComponents();
+        this.sceneObjects.remove(entity.getName());
     }
 
-    public void renderGameObjects()
-    {
-        List<Entity> entities = new ArrayList<>(sceneObjects.values());
-        currentSceneRenderer.render(entities);
-    }
-
-    public void drawImGui()
-    {
-
-    }
-
-    public void start()
+    public void startScene()
     {
         for(Entity entity : sceneObjects.values())
             entity.start();
     }
 
-    public void setSelectedEntity(Entity entity)
+    public void stopScene()
     {
-        this.selectedEntity = entity;
+        this.isRunning = false;
     }
-
 }

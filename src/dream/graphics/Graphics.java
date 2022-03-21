@@ -1,15 +1,10 @@
 package dream.graphics;
 
-import dream.ecs.components.Shader;
 import dream.ecs.components.Shape;
 import dream.ecs.entities.Entity;
 import dream.ecs.entities.EntityManager;
+import dream.editor.Editor;
 import dream.io.output.Window;
-import dream.graphics.renderer.Renderer;
-import dream.editor.EditorScene;
-import dream.scenes.Scene;
-import dream.scenes.SceneManager;
-import dream.toolbox.AssetPool;
 
 import java.util.Objects;
 
@@ -19,6 +14,7 @@ import static org.lwjgl.opengl.GL11.*;
 public class Graphics implements Runnable
 {
     private Window window;
+    private Editor editor;
 
     private static Graphics engine;
     public static volatile boolean isRunning = true;
@@ -46,24 +42,14 @@ public class Graphics implements Runnable
         this.window = Window.getDreamWindow();
         this.window.showWindow();
 
+        this.editor = Editor.getEditor();
+        this.editor.initializeEditor(this.window.getWindowId());
+
         Entity sun = EntityManager.createEntity("Sun");
         sun.addComponent(new Shape());
-        Shader shader = AssetPool.getDefaultShader();
-        sun.addComponent(shader);
 
-        Shader picking = AssetPool.getShader("src/dream/res/shaders/pickingShader.glsl");
-        picking.onStart();
-
-        EditorScene scene = new EditorScene();
-        Scene.setCurrentSceneRenderer(new Renderer());
-        scene.addSceneObject(sun);
-        scene.setSelectedEntity(sun);
-        SceneManager.addScene(scene, true);
-
-        Scene.getCurrentSceneRenderer().bindPickingShader(picking);
-
-        //scene.serialize(sun);
-
+        this.editor.addObjectToScene(sun);
+        this.editor.startScene();
 //            DreamCube mercury = EntityManager.createNewCube();
 //            mercury.attachShader(new Shader("shaders//entity.vert", "shaders//entity.frag"));
 //            mercury.setPosition(new Vector3f(0.0f, 1.5f, 0.0f));
@@ -101,7 +87,9 @@ public class Graphics implements Runnable
 
     private void updateState()
     {
-        this.window.update();
+        this.window.startFrame();
+        this.editor.drawEditor();
+        this.window.endFrame();
     }
 
 //    private void render()
@@ -122,7 +110,7 @@ public class Graphics implements Runnable
     private void cleanUp()
     {
         this.window.cleanUp();
-
+        this.editor.cleanUp();
         glfwTerminate();
         Objects.requireNonNull(glfwSetErrorCallback(null)).free();
     }

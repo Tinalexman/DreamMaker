@@ -1,6 +1,6 @@
 package dream.graphics.renderer;
 
-import dream.ecs.components.Shader;
+import dream.assets.Shader;
 import dream.ecs.entities.Entity;
 
 import java.util.HashMap;

@@ -9,10 +9,10 @@ public class PickingTexture
     private int FBO_ID;
     private int depthTextureID;
 
-    public PickingTexture(int textureWidth, int textureHeight)
+    public PickingTexture()
     {
-        if(!init(textureWidth, textureHeight))
-            throw new RuntimeException("Picking Texture could not be created");
+        if(!init(Window.getWindowWidth(), Window.getWindowHeight()))
+            throw new RuntimeException("Picking Texture's FrameBuffer could not be completed!");
     }
 
     private boolean init(int width, int height)
@@ -39,8 +39,7 @@ public class PickingTexture
         glDrawBuffer(GL_COLOR_ATTACHMENT0);
 
         if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-            throw new RuntimeException("FrameBuffer is not complete!");
-
+            return false;
 
         glBindTexture(GL_TEXTURE_2D, 0);
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -66,7 +65,7 @@ public class PickingTexture
         float[] pixels = new float[3];
         glReadPixels(xCoordinate, yCoordinate, 1, 1, GL_RGB, GL_FLOAT, pixels);
 
-        return (int) pixels[0];
+        return (int) (pixels[0]) - 1;
     }
 
     public void destroy()

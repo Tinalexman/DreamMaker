@@ -1,6 +1,6 @@
 package dream.io.output;
 
-import dream.ecs.components.Texture;
+import dream.assets.Texture;
 
 import static org.lwjgl.opengl.GL30.*;
 
@@ -55,8 +55,8 @@ public class FrameBuffer
         glDeleteFramebuffers(this.FBO_ID);
     }
 
-    public static FrameBuffer createFrameBuffer(int width, int height)
+    public static FrameBuffer createFrameBuffer()
     {
-        return new FrameBuffer(width, height);
+        return new FrameBuffer(Window.getWindowWidth(), Window.getWindowHeight());
     }
 }

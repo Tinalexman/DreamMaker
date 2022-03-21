@@ -1,7 +1,8 @@
 package dream.io.input;
 
+import dream.editor.Editor;
 import dream.io.output.Window;
-import dream.scenes.Scene;
+import org.joml.Vector2f;
 import org.joml.Vector4f;
 
 import static org.lwjgl.glfw.GLFW.*;
@@ -112,10 +113,10 @@ public class MouseListener
     public static float getOrthoX()
     {
         float currentX = getX();
-        currentX = ((currentX / (float) Window.WINDOW_WIDTH) * 2.0f) - 1.0f;
+        currentX = ((currentX / (float) Window.getWindowWidth()) * 2.0f) - 1.0f;
         Vector4f tempVector = new Vector4f(currentX, 0, 0, 1);
-        tempVector.mul(Window.getDreamWindow().getInverseProjectionMatrix())
-                .mul(Scene.getCurrentSceneRenderer().getCamera().getInverseViewMatrix());
+        tempVector.mul(Editor.getEditor().getCamera().getInverseProjectionMatrix())
+                .mul(Editor.getEditor().getCamera().getInverseViewMatrix());
         currentX = tempVector.x;
         return currentX;
     }
@@ -123,10 +124,10 @@ public class MouseListener
     public static float getOrthoY()
     {
         float currentY = getY();
-        currentY = ((currentY / (float) Window.WINDOW_HEIGHT) * 2.0f) - 1.0f;
+        currentY = ((currentY / (float) Window.getWindowWidth()) * 2.0f) - 1.0f;
         Vector4f tempVector = new Vector4f(0, currentY, 0, 1);
-        tempVector.mul(Window.getDreamWindow().getInverseProjectionMatrix())
-                .mul(Scene.getCurrentSceneRenderer().getCamera().getInverseViewMatrix());
+        tempVector.mul(Editor.getEditor().getCamera().getInverseProjectionMatrix())
+                .mul(Editor.getEditor().getCamera().getInverseViewMatrix());
         currentY = tempVector.y;
         return currentY;
     }
@@ -134,18 +135,28 @@ public class MouseListener
     public static float getScreenX()
     {
         float currentX = getX();
-        currentX = ((currentX / (float) Window.WINDOW_WIDTH) * 2.0f);
+        currentX = ((currentX / (float) Window.getWindowWidth()) * 2.0f);
         return currentX;
     }
 
     public static float getScreenY()
     {
         float currentY = getY();
-        currentY = ((currentY / (float) Window.WINDOW_HEIGHT) * 2.0f) - 1.0f;
+        currentY = ((currentY / (float) Window.getWindowHeight()) * 2.0f) - 1.0f;
         Vector4f tempVector = new Vector4f(0, currentY, 0, 1);
-        tempVector.mul(Window.getDreamWindow().getInverseProjectionMatrix())
-                .mul(Scene.getCurrentSceneRenderer().getCamera().getInverseViewMatrix());
+        tempVector.mul(Editor.getEditor().getCamera().getInverseProjectionMatrix())
+                .mul(Editor.getEditor().getCamera().getInverseViewMatrix());
         currentY = tempVector.y;
         return currentY;
+    }
+
+    public static void setGameViewportPos(Vector2f vector2f)
+    {
+
+    }
+
+    public static void setGameViewportSize(Vector2f vector2f)
+    {
+
     }
 }

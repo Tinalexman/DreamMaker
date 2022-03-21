@@ -1,11 +1,11 @@
-package dream.ecs.containables.camera;
+package dream.camera;
 
-import dream.ecs.containables.Containable;
 import dream.constants.GlobalConstants;
+import dream.io.output.Window;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 
-public class Camera implements Containable
+public class Camera
 {
     protected Vector3f cameraRotation; // pitch = about x  yaw = about y roll = about z
     protected Vector3f cameraPosition;
@@ -13,10 +13,12 @@ public class Camera implements Containable
     protected Vector3f cameraFront;
     protected float cameraZoom;
     protected boolean hasChanged;
-    protected Matrix4f inverseViewMatrix;
     protected float nearPlane;
     protected float farPlane;
     protected boolean active;
+
+    protected Matrix4f inverseViewMatrix;
+    protected Matrix4f inverseProjectionMatrix;
 
     private static Camera CURRENT_CAMERA;
 
@@ -42,6 +44,7 @@ public class Camera implements Containable
         this.farPlane = GlobalConstants.DEFAULT_EDITOR_CAMERA_FAR_PLANE;
 
         this.inverseViewMatrix = new Matrix4f().identity();
+        this.inverseProjectionMatrix = new Matrix4f().identity();
     }
 
     public void update()
@@ -71,9 +74,23 @@ public class Camera implements Containable
         return viewMatrix;
     }
 
+    public Matrix4f getProjectionMatrix()
+    {
+        Matrix4f projectionMatrix = new Matrix4f().identity();
+        projectionMatrix.perspective(getFieldOfView(), (float) (Window.getWindowWidth() / Window.getWindowHeight()),
+                getNearPlane(), getFarPlane());
+        projectionMatrix.invert(this.inverseProjectionMatrix);
+        return projectionMatrix;
+    }
+
     public Matrix4f getInverseViewMatrix()
     {
         return this.inverseViewMatrix;
+    }
+
+    public Matrix4f getInverseProjectionMatrix()
+    {
+        return this.inverseProjectionMatrix;
     }
 
     public float getFieldOfView()

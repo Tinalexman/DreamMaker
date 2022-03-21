@@ -7,6 +7,7 @@ public class Shape extends Component
 
     public Shape()
     {
+
     }
 
     @Override
@@ -21,6 +22,7 @@ public class Shape extends Component
         if(!this.ready)
         {
             EntityManager.getEntity(this.parentID).addComponentIfAbsent(new Mesh());
+            EntityManager.getEntity(this.parentID).addComponentIfAbsent(new Color());
             EntityManager.getEntity(this.parentID).addComponentIfAbsent(new Transform());
             this.ready = true;
         }

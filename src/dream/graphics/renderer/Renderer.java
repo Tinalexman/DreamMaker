@@ -1,7 +1,11 @@
 package dream.graphics.renderer;
 
+import dream.assets.Shader;
+import dream.assets.Texture;
+import dream.camera.Camera;
 import dream.ecs.components.*;
 import dream.ecs.entities.Entity;
+import dream.ecs.entities.EntityManager;
 import dream.editor.EditorCamera;
 import dream.io.output.FrameBuffer;
 import dream.io.output.PickingTexture;
@@ -16,14 +20,6 @@ import static org.lwjgl.opengl.GL33.*;
 
 public class Renderer
 {
-
-    public static Renderer RENDERER;
-
-    private final EditorCamera camera;
-    private FrameBuffer frameBuffer;
-    private PickingTexture pickingTexture;
-    private Shader pickingShader;
-
     public static final int WIREFRAME = GL_LINE;
     public static final int SOLID = GL_FILL;
 
@@ -34,40 +30,7 @@ public class Renderer
 
     public Renderer()
     {
-        this.camera = new EditorCamera();
-        this.camera.requestActivation();
 
-        this.frameBuffer = FrameBuffer.createFrameBuffer(Window.WINDOW_WIDTH, Window.WINDOW_HEIGHT);
-        this.pickingTexture = new PickingTexture(Window.WINDOW_WIDTH, Window.WINDOW_HEIGHT);
-
-        RENDERER = this;
-    }
-
-    public EditorCamera getCamera()
-    {
-        return this.camera;
-    }
-
-    public static int getCurrentFrameBufferTextureID()
-    {
-        return RENDERER.frameBuffer.getTextureID();
-    }
-
-    public static void updateFramebuffer()
-    {
-        if(!(Window.PREV_WINDOW_WIDTH >= Window.WINDOW_WIDTH || Window.PREV_WINDOW_HEIGHT >= Window.WINDOW_HEIGHT))
-        {
-            if(RENDERER.frameBuffer != null)
-                RENDERER.frameBuffer.destroy();
-
-            if(RENDERER.pickingTexture != null)
-                RENDERER.pickingTexture.destroy();
-
-            RENDERER.frameBuffer = FrameBuffer.createFrameBuffer(Window.WINDOW_WIDTH, Window.WINDOW_HEIGHT);
-            RENDERER.pickingTexture = new PickingTexture(Window.WINDOW_WIDTH, Window.WINDOW_HEIGHT);
-            Window.PREV_WINDOW_WIDTH = Window.WINDOW_WIDTH;
-            Window.PREV_WINDOW_HEIGHT = Window.WINDOW_HEIGHT;
-        }
     }
 
     public void setModes(int faceMode, int drawMode)
@@ -81,17 +44,12 @@ public class Renderer
         glPolygonMode(faceMode, drawMode);
     }
 
-    private void prepareRenderer()
+    public void prepareRenderer(FrameBuffer frameBuffer)
     {
-        this.frameBuffer.bindFrameBuffer();
+        frameBuffer.bindFrameBuffer();
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-        this.frameBuffer.unbindFrameBuffer();
-    }
-
-    public void bindPickingShader(Shader shader)
-    {
-        this.pickingShader = shader;
+        frameBuffer.unbindFrameBuffer();
     }
 
     private void loadEntityTransform(Entity object, Shader shader, boolean isPickingShaderPass) throws Exception
@@ -105,8 +63,8 @@ public class Renderer
             shader.loadUniform("transformationMatrix", matrix4f);
             if(!isPickingShaderPass)
             {
-                Matrix3f inversed = Loader.calculateInverseProjection(matrix4f);
-                shader.loadUniform("inversedMatrix", inversed);
+//                Matrix3f inversed = Loader.calculateInverseProjection(matrix4f);
+//                shader.loadUniform("inversedMatrix", inversed);
                 transform.resetChange();
             }
         }
@@ -119,96 +77,88 @@ public class Renderer
 
         Material material = object.getComponent(Material.class);
         if(material == null)
-            return;
-        if(material.hasChanged())
         {
-            shader.applyMaterial("material", material);
-            material.resetChange();
+            Color color = object.getComponent(Color.class);
+            if(color.hasChanged())
+            {
+                shader.loadUniform("color", color.getRGB());
+                color.resetChange();
+            }
+        }
+        else
+        {
+            if(material.hasChanged())
+            {
+                shader.applyMaterial("material", material);
+                material.resetChange();
+            }
         }
     }
 
-    private void loadViewAndProjection(Shader shader, boolean isPickingShaderPass) throws Exception
+    private void loadViewAndProjection(Camera camera, Shader shader, boolean isPickingShaderPass) throws Exception
     {
         if(!camera.hasChanged())
             return;
 
-        shader.loadUniform("viewMatrix", this.camera.getViewMatrix());
-        shader.loadUniform("projectionMatrix", Window.getProjectionMatrix(this.camera));
+        shader.loadUniform("viewMatrix", camera.getViewMatrix());
+        shader.loadUniform("projectionMatrix", camera.getProjectionMatrix());
 
         if(!isPickingShaderPass)
             camera.resetChange();
     }
 
 
-    private void loadUniforms(Shader shader, Entity object, boolean isPickingShaderPass) throws Exception
+    private void loadUniforms(Camera camera, Shader shader, Entity object, boolean isPickingShaderPass) throws Exception
     {
         loadEntityTransform(object, shader, isPickingShaderPass);
-        loadViewAndProjection(shader, isPickingShaderPass);
+        loadViewAndProjection(camera, shader, isPickingShaderPass);
         loadEntityMaterial(object, shader, isPickingShaderPass);
     }
 
-    public void render(List<Entity> dreamObjects)
-    {
-        this.camera.update();
-        prepareRenderer();
-        pickingTextureRenderPass(dreamObjects);
-        renderEntities(dreamObjects, false);
-    }
-
-    private void pickingTextureRenderPass(List<Entity> dreamObjects)
+    public boolean startPickingTexturePass(PickingTexture pickingTexture)
     {
         boolean blendWasEnabled = glIsEnabled(GL_BLEND);
         if(blendWasEnabled)
             glDisable(GL_BLEND);
 
-        this.pickingTexture.enableWriting();
+        pickingTexture.enableWriting();
 
-        glViewport(0, 0, Window.WINDOW_WIDTH, Window.WINDOW_HEIGHT);
+        glViewport(0, 0, Window.getWindowWidth(), Window.getWindowHeight());
         glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        renderEntities(dreamObjects, true);
+        return blendWasEnabled;
+    }
 
-//        if(MouseListener.isMouseButtonDown(GLFW_MOUSE_BUTTON_LEFT))
-//        {
-//            int x = (int) MouseListener.getScreenX();
-//            int y = (int) MouseListener.getScreenY();
-//            System.out.println(pickingTexture.readPixel(x, y));
-//        }
 
-        this.pickingTexture.disableWriting();
+    public void endPickingTexturePass(PickingTexture pickingTexture, boolean blended)
+    {
+        pickingTexture.disableWriting();
 
-        if(blendWasEnabled)
+        if(blended)
             glEnable(GL_BLEND);
     }
 
-    private void renderEntities(List<Entity> dreamObjects, boolean isPickingTexturePass)
+    public void renderEntities(Camera camera, FrameBuffer frameBuffer, Shader pickingShader,
+                                List<Entity> dreamObjects, boolean isPickingTexturePass)
     {
         glEnable(GL_DEPTH_TEST);
 
         if(!isPickingTexturePass)
-            this.frameBuffer.bindFrameBuffer();
+            frameBuffer.bindFrameBuffer();
+
+        Shader shader = (isPickingTexturePass) ? pickingShader : EntityManager.getEntityShader();
 
         for(Entity dreamObject : dreamObjects)
         {
-            Shader shader;
-            if(!isPickingTexturePass)
-            {
-                shader = dreamObject.getComponent(Shader.class);
-                if(shader == null)
-                    continue;
-            }
-            else
-                shader = this.pickingShader;
-
             shader.startProgram();
 
             try
             {
-                loadUniforms(shader, dreamObject, isPickingTexturePass);
+                loadUniforms(camera, shader, dreamObject, isPickingTexturePass);
 
                 if(isPickingTexturePass)
-                    shader.loadUniform("fEntityId", (float) dreamObject.getID());
+                    shader.loadUniform("fEntityId", (float) (dreamObject.getID() + 1));
 
                 Mesh mesh = dreamObject.getComponent(Mesh.class);
                 if(mesh == null)
@@ -234,7 +184,7 @@ public class Renderer
         }
 
         if(!isPickingTexturePass)
-            this.frameBuffer.unbindFrameBuffer();
+            frameBuffer.unbindFrameBuffer();
 
         glDisable(GL_DEPTH_TEST);
     }
@@ -249,10 +199,4 @@ public class Renderer
         }
     }
 
-    public void cleanUp()
-    {
-        this.frameBuffer.destroy();
-        this.pickingTexture.destroy();
-        this.pickingShader.onDestroyRequested();
-    }
 }

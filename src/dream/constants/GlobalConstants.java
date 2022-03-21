@@ -13,4 +13,6 @@ public class GlobalConstants
     public static final float DEFAULT_CAMERA_MAX_PITCH = 89.0F;
     public static final float DEFAULT_CAMERA_MIN_ZOOM = 1.0F;
     public static final float DEFAULT_CAMERA_MAX_ZOOM = 45.0F;
+
+    public static float DEFAULT_COLUMN_WIDTH = 80.0f;
 }

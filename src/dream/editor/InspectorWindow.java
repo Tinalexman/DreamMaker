@@ -8,17 +8,23 @@ import org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
 
+import static dream.constants.GlobalConstants.DEFAULT_COLUMN_WIDTH;
+
 public class InspectorWindow
 {
-    private static float DEFAULT_COLUMN_WIDTH = 80.0f;
-    private static Entity selectedEntity;
+    private Entity selectedEntity;
 
-    public static void setSelectedEntity(Entity entity)
+    public InspectorWindow()
+    {
+
+    }
+
+    public void setSelectedEntity(Entity entity)
     {
         selectedEntity = entity;
     }
 
-    public static void drawImGui()
+    public void drawImGui()
     {
         ImGui.begin("Inspector");
 

@@ -1,9 +1,8 @@
 package dream.light;
 
-import dream.ecs.containables.Containable;
 import org.joml.Vector3f;
 
-public class DirectionalLight implements Containable
+public class DirectionalLight
 {
     private Vector3f color, direction;
     private float intensity;

@@ -8,14 +8,8 @@ import java.util.List;
 
 public class SceneGraphWindow
 {
-    private static List<Entity> entities;
 
-    public static void setEntities(List<Entity> entities)
-    {
-        SceneGraphWindow.entities = entities;
-    }
-
-    public static void drawImGui()
+    public void drawImGui(List<Entity> entities)
     {
         ImGui.begin("Scene Graph");
         int index = 0;

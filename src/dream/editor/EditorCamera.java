@@ -1,6 +1,6 @@
 package dream.editor;
 
-import dream.ecs.containables.camera.Camera;
+import dream.camera.Camera;
 import dream.constants.GlobalConstants;
 import dream.io.input.KeyListener;
 import dream.io.input.MouseListener;

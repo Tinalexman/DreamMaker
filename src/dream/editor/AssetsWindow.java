@@ -5,7 +5,7 @@ import imgui.ImGui;
 public class AssetsWindow
 {
 
-    public static void drawImGui()
+    public void drawImGui()
     {
         ImGui.begin("Assets Pool");
 
